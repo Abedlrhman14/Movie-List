@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "react-bootstrap";
+import Navbar from "./components/Navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import MovieList from "./components/MovieList";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Pagination from "./components/Pagination";
 
 function App() {
+  //get movies from api
+  const [movies,setmovies] = useState([])
+  const [pageCount,setpageCount] = useState([0])
+  const getAllMovies= async()=>{
+   const res=await axios.get('https://api.themoviedb.org/3/movie/popular?api_key=e4285999753c19416294af7c63fe4fee&language=en-US&page=1')
+   setmovies(res.data.results)
+   setpageCount(res.data.total_pages)
+  }
+  useEffect(()=>{
+    getAllMovies();
+    // console.log(movies)
+  },[])
+  //to search in api
+  const search = async(word)=>{
+    if(word=== ''){
+      getAllMovies();
+    }else{
+      const res=await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e4285999753c19416294af7c63fe4fee&query=${word}&language=`)
+      setmovies(res.data.results)
+      setpageCount(res.data.total_pages)
+    } 
+  }  
+  
+  const getPage = async(page)=>{
+    const res=await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=e4285999753c19416294af7c63fe4fee&language=en-US&page=${page}`)
+    setmovies(res.data.results)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="color-body">
+      <Navbar search={search}></Navbar>
+      <Container>
+      <MovieList movies={movies} getPage={getPage} pageCount={pageCount} ></MovieList>      
+      </Container>
     </div>
   );
 }
