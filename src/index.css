@@ -73,3 +73,43 @@ body {
   -ms-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
 }
+.card-details{
+  height: 370px;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+}
+.card-story{
+  height: 300px;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+}
+.img-movie{
+  height: 360px;
+  padding: 10px;
+  border-radius: 20px;
+}
+.card-text-details{
+  color: #555555;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 49px;
+}
+.card-story{
+  height: 300px;
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+.card-text-title{
+  color:#555555;
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 49px;
+}
+.card-text-story{
+  color:#555555;
+  font-size: 180x;
+  letter-spacing: 0;
+  line-height: 32px;
+}

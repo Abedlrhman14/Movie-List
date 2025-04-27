@@ -5,7 +5,8 @@ import MovieList from "./components/MovieList";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from "./components/Pagination";
-
+import {BrowserRouter , Routes , Route} from "react-router-dom"
+import MovieDettiles from "./components/MovieDettiles";
 function App() {
   //get movies from api
   const [movies,setmovies] = useState([])
@@ -38,7 +39,13 @@ function App() {
     <div className="color-body">
       <Navbar search={search}></Navbar>
       <Container>
-      <MovieList movies={movies} getPage={getPage} pageCount={pageCount} ></MovieList>      
+        <BrowserRouter>
+          <Routes>
+            <Route path="/"element={<MovieList movies={movies} getPage={getPage} pageCount={pageCount} ></MovieList>}/>
+            <Route path="/movie/:id" element={<MovieDettiles/>}/>
+            
+          </Routes>
+         </BrowserRouter>
       </Container>
     </div>
   );
